@@ -34,8 +34,13 @@ def urlopen(url, data=None, timeout=defaults.TIMEOUT, ca_certs=None,
                 self.sock = sock
                 self._tunnel()
 
+            if defaults.CHECK_SSL_CERTS:
+                ssl_cert_requirement = ssl.CERT_REQUIRED
+            else:
+                ssl_cert_requirement = ssl.CERT_NONE
+
             self.sock = ssl.wrap_socket(
-                sock, ca_certs=ca_certs, cert_reqs=ssl.CERT_REQUIRED)
+                sock, ca_certs=ca_certs, cert_reqs=ssl_cert_requirement)
 
             if assert_hostname is not None:
                 match_hostname(self.sock.getpeercert(),

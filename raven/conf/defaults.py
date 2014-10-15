@@ -62,6 +62,8 @@ PROCESSORS = (
 # Default Project ID
 PROJECT = 1
 
+CHECK_SSL_CERTS = False
+
 try:
     # Try for certifi first since they likely keep their bundle more up to date
     import certifi
